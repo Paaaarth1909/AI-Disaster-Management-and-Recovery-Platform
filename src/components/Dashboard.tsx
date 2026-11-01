@@ -31,9 +31,15 @@ import AlertModal from './AlertModal';
 import AIChat from './AIChat';
 import { Globe } from './Globe';
 import Dock from './Dock';
+import RadarScanner from './RadarScanner';
 import { format } from 'date-fns';
 
-export default function Dashboard() {
+interface DashboardProps {
+  initialView?: string;
+  onExitToLanding?: () => void;
+}
+
+export default function Dashboard({ initialView = 'map', onExitToLanding: _onExitToLanding }: DashboardProps = {}) {
   const { 
     disasters, 
     resources, 
@@ -46,7 +52,13 @@ export default function Dashboard() {
     unsubscribeFromUpdates
   } = useDisasterStore();
 
-  const [activeView, setActiveView] = useState('map');
+  const [activeView, setActiveView] = useState(initialView);
+
+  useEffect(() => {
+    if (initialView) {
+      setActiveView(initialView);
+    }
+  }, [initialView]);
   const [showReportModal, setShowReportModal] = useState(false);
   const [showResourceModal, setShowResourceModal] = useState(false);
   const [showAlertModal, setShowAlertModal] = useState(false);
@@ -126,13 +138,13 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center space-y-4">
+      <div className="min-h-screen bg-[#030712] flex flex-col items-center justify-center space-y-4">
         <div className="relative flex items-center justify-center">
-          <div className="w-20 h-20 rounded-full border-4 border-blue-500/20 border-t-blue-500 animate-spin"></div>
-          <Activity className="w-8 h-8 text-blue-400 absolute" />
+          <div className="w-20 h-20 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 animate-spin"></div>
+          <Activity className="w-8 h-8 text-emerald-400 absolute" />
         </div>
-        <p className="text-slate-400 font-mono text-sm tracking-widest uppercase animate-pulse">
-          Initializing DisasterHub Telemetry...
+        <p className="text-zinc-400 font-mono text-xs tracking-widest uppercase animate-pulse">
+          Initializing DisasterHub Telemetry Pipeline...
         </p>
       </div>
     );
@@ -140,14 +152,14 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-        <div className="bg-slate-900 border border-red-500/30 p-8 rounded-2xl text-center max-w-md shadow-2xl">
+      <div className="min-h-screen bg-[#030712] flex items-center justify-center p-4">
+        <div className="glass-panel border-red-500/30 p-8 rounded-2xl text-center max-w-md shadow-2xl">
           <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4 animate-bounce" />
           <h3 className="text-xl font-bold text-white mb-2">Telemetry Pipeline Error</h3>
-          <p className="text-sm text-slate-400 mb-6">{error}</p>
+          <p className="text-sm text-zinc-400 mb-6">{error}</p>
           <button 
             onClick={() => fetchInitialData()}
-            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-semibold transition-all shadow-lg shadow-blue-600/30"
+            className="px-6 py-2.5 glass-btn-primary text-white rounded-xl text-sm font-semibold transition-all"
           >
             Reconnect Terminal
           </button>
@@ -157,12 +169,12 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 pt-16 pb-28 relative overflow-x-hidden selection:bg-blue-500 selection:text-white">
-      {/* Background ambient light mesh */}
+    <div className="min-h-screen bg-[#030712] text-zinc-100 pt-16 pb-28 relative overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-200 bg-dot-grid">
+      {/* Tactical cybernetic ambient glow */}
       <div className="fixed inset-0 pointer-events-none opacity-40">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-rose-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10 space-y-6">
@@ -212,10 +224,10 @@ export default function Dashboard() {
           </div>
 
           {/* Supply Depot Stockpiles Card */}
-          <div className="bg-slate-900/80 hover:bg-slate-900 backdrop-blur-xl border border-slate-800 hover:border-blue-500/40 rounded-2xl p-4 transition-all duration-300 shadow-xl group">
+          <div className="glass-panel hover:border-cyan-500/40 rounded-2xl p-4 transition-all duration-300 shadow-xl group">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">Relief Stockpiles</span>
-              <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:scale-110 transition-transform">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">Relief Stockpiles</span>
+              <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:scale-110 transition-transform">
                 <Box className="w-4 h-4" />
               </div>
             </div>
@@ -223,11 +235,11 @@ export default function Dashboard() {
               <span className="text-3xl font-extrabold text-white font-mono">
                 {totalSupplyCount > 1000 ? `${(totalSupplyCount / 1000).toFixed(1)}k` : totalSupplyCount}
               </span>
-              <span className="text-xs text-blue-400 font-semibold">
+              <span className="text-xs text-cyan-400 font-semibold">
                 {deployedResources.length} Batches Dispatched
               </span>
             </div>
-            <div className="mt-3 flex items-center justify-between text-[11px] text-slate-400 pt-2.5 border-t border-slate-800/80">
+            <div className="mt-3 flex items-center justify-between text-[11px] text-zinc-400 pt-2.5 border-t border-zinc-800">
               <span>{resources.length} Depots monitored</span>
               <span className="text-emerald-400 font-medium">Supply lines clear</span>
             </div>
@@ -236,24 +248,24 @@ export default function Dashboard() {
           {/* AI Emergency Copilot Banner Card */}
           <button
             onClick={() => setShowChat(true)}
-            className="bg-gradient-to-br from-blue-900/50 via-indigo-900/40 to-slate-900/80 hover:from-blue-900/70 hover:to-slate-900 backdrop-blur-xl border border-blue-500/30 hover:border-blue-400 rounded-2xl p-4 text-left transition-all duration-300 shadow-xl group relative overflow-hidden"
+            className="glass-panel hover:border-emerald-500/40 rounded-2xl p-4 text-left transition-all duration-300 shadow-xl group relative overflow-hidden cursor-pointer"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono uppercase tracking-wider text-blue-300 flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-spin" />
-                <span>Gemini Intelligence</span>
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 flex items-center space-x-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Gemini 1.5 Intelligence</span>
               </span>
-              <div className="p-2 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30 group-hover:scale-110 transition-transform">
+              <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 group-hover:scale-110 transition-transform">
                 <Bot className="w-4 h-4" />
               </div>
             </div>
             <div className="flex items-baseline space-x-2">
               <span className="text-xl font-bold text-white tracking-tight">AI Mission Copilot</span>
             </div>
-            <p className="mt-1 text-xs text-blue-200/70 truncate">
-              Ask questions, predict logistics, verify citizen rumors
+            <p className="mt-1 text-xs text-zinc-400 truncate">
+              Live SitRep, logistics deficit analysis, rumor verification
             </p>
-            <div className="mt-2.5 flex items-center text-[11px] text-blue-400 font-semibold group-hover:translate-x-1 transition-transform">
+            <div className="mt-2.5 flex items-center text-[11px] text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform">
               <span>Launch Copilot Terminal</span>
               <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
             </div>
@@ -262,13 +274,13 @@ export default function Dashboard() {
         </div>
 
         {/* MAIN VISUALIZATION STAGE (MAP / GLOBE / ANALYTICS / AI) */}
-        <div className="bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
+        <div className="glass-panel rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
           
           {/* Top Control Bar inside Viewport */}
-          <div className="px-4 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-slate-950/60">
+          <div className="px-4 py-3 border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-3 bg-[#030712]/70">
             
             {/* View Switcher Tabs */}
-            <div className="flex items-center space-x-1 bg-slate-900 p-1 rounded-2xl border border-slate-800">
+            <div className="flex items-center space-x-1 bg-zinc-900/90 p-1 rounded-2xl border border-white/[0.08]">
               {[
                 { id: 'map', label: 'Tactical Map', icon: MapIcon },
                 { id: 'globe', label: '3D Globe', icon: Globe2 },
@@ -283,8 +295,8 @@ export default function Dashboard() {
                     onClick={() => setActiveView(tab.id)}
                     className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                       active
-                        ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                        ? 'bg-emerald-500 text-[#030712] font-bold shadow-lg shadow-emerald-500/30'
+                        : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
                     }`}
                   >
                     <Icon className="w-3.5 h-3.5" />
@@ -306,7 +318,7 @@ export default function Dashboard() {
 
               <button
                 onClick={() => setShowAlertModal(true)}
-                className="flex items-center space-x-1.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white px-3.5 py-1.5 rounded-xl text-xs font-semibold shadow-lg shadow-amber-600/20 transition-all active:scale-95"
+                className="flex items-center space-x-1.5 glass-btn-amber text-white px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all active:scale-95"
               >
                 <Bell className="w-3.5 h-3.5" />
                 <span>Broadcast Siren</span>
@@ -314,9 +326,9 @@ export default function Dashboard() {
 
               <button
                 onClick={() => setShowResourceModal(true)}
-                className="hidden sm:flex items-center space-x-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-medium border border-slate-700 transition-all active:scale-95"
+                className="hidden sm:flex items-center space-x-1.5 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-medium border border-white/[0.08] transition-all active:scale-95"
               >
-                <Box className="w-3.5 h-3.5 text-blue-400" />
+                <Box className="w-3.5 h-3.5 text-cyan-400" />
                 <span>Add Supply</span>
               </button>
 
@@ -380,15 +392,15 @@ export default function Dashboard() {
                 placeholder="Filter incidents by title, sector name, or hazard type..."
                 value={disasterSearch}
                 onChange={(e) => setDisasterSearch(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50"
+                className="w-full bg-[#030712] border border-white/[0.08] rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               />
-              <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
             </div>
 
             {/* Incidents Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 max-h-[500px] overflow-y-auto pr-1">
               {filteredDisasters.length === 0 ? (
-                <div className="col-span-2 text-center py-12 text-slate-500 text-xs">
+                <div className="col-span-2 text-center py-12 text-zinc-500 text-xs">
                   No active incidents match current search or severity filters.
                 </div>
               ) : (
@@ -406,8 +418,8 @@ export default function Dashboard() {
                       }}
                       className={`p-4 rounded-2xl border transition-all duration-200 cursor-pointer relative group ${
                         isSelected 
-                          ? 'bg-slate-800/90 border-blue-500 ring-2 ring-blue-500/30 shadow-xl' 
-                          : 'bg-slate-950/60 hover:bg-slate-800/50 border-slate-800/80 hover:border-slate-700'
+                          ? 'bg-zinc-900 border-emerald-500 ring-2 ring-emerald-500/30 shadow-xl' 
+                          : 'bg-[#030712]/80 hover:bg-zinc-900/60 border-white/[0.08] hover:border-emerald-500/30'
                       }`}
                     >
                       {/* Card Top: Severity Badge & Time */}
@@ -417,27 +429,27 @@ export default function Dashboard() {
                             ? 'bg-red-500/20 text-red-400 border border-red-500/30'
                             : disaster.severity === 3
                             ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                            : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                            : 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
                         }`}>
                           <Icon className="w-3 h-3 mr-1" />
                           <span>LVL {disaster.severity} &bull; {disaster.type}</span>
                         </span>
-                        <span className="text-[10px] text-slate-500 font-mono">
+                        <span className="text-[10px] text-zinc-500 font-mono">
                           {format(new Date(disaster.created_at), 'MMM d, HH:mm')}
                         </span>
                       </div>
 
                       {/* Title & Description */}
-                      <h4 className="font-bold text-white text-sm group-hover:text-blue-300 transition-colors mb-1">
+                      <h4 className="font-bold text-white text-sm group-hover:text-emerald-300 transition-colors mb-1">
                         {disaster.title}
                       </h4>
-                      <p className="text-xs text-slate-400 line-clamp-2 mb-3">
+                      <p className="text-xs text-zinc-400 line-clamp-2 mb-3">
                         {disaster.description}
                       </p>
 
                       {/* Location & Casualty Stats */}
-                      <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800/60 font-mono">
-                        <span className="truncate max-w-[140px] text-slate-300">
+                      <div className="flex items-center justify-between text-xs text-zinc-400 pt-2 border-t border-white/[0.06] font-mono">
+                        <span className="truncate max-w-[140px] text-zinc-300">
                           📍 {disaster.location_name}
                         </span>
                         <span className="text-amber-400">
@@ -446,14 +458,14 @@ export default function Dashboard() {
                       </div>
 
                       {/* Card Action Shortcuts */}
-                      <div className="mt-3 flex items-center space-x-1.5 pt-2 border-t border-slate-800/40">
+                      <div className="mt-3 flex items-center space-x-1.5 pt-2 border-t border-white/[0.06]">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             setSelectedDisaster(disaster.id);
                             setActiveView('map');
                           }}
-                          className="flex-1 py-1 px-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-[11px] font-medium transition-colors text-center"
+                          className="flex-1 py-1 px-2 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/20 text-[11px] font-medium transition-colors text-center"
                         >
                           Focus Map
                         </button>
@@ -463,7 +475,7 @@ export default function Dashboard() {
                             setSelectedDisaster(disaster.id);
                             setActiveView('ai-analysis');
                           }}
-                          className="py-1 px-2 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-[11px] font-medium transition-colors flex items-center space-x-1"
+                          className="py-1 px-2 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/20 text-[11px] font-medium transition-colors flex items-center space-x-1"
                         >
                           <Brain className="w-3 h-3" />
                           <span>AI Triage</span>
@@ -474,7 +486,7 @@ export default function Dashboard() {
                             setSelectedDisaster(disaster.id);
                             setShowAlertModal(true);
                           }}
-                          className="py-1 px-2 rounded-lg bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 text-[11px] font-medium transition-colors flex items-center space-x-1"
+                          className="py-1 px-2 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/20 text-[11px] font-medium transition-colors flex items-center space-x-1"
                         >
                           <Bell className="w-3 h-3" />
                           <span>Alert</span>
@@ -487,19 +499,22 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* RIGHT 1 COL: LOGISTICS & LIVE SIRENS */}
+          {/* RIGHT 1 COL: RADAR + LOGISTICS + LIVE SIRENS */}
           <div className="space-y-6">
             
+            {/* Live Sweeping Doppler Radar Scanner Component */}
+            <RadarScanner />
+
             {/* Supplies Inventory */}
-            <div className="bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-3xl p-5 shadow-2xl">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+            <div className="glass-panel rounded-3xl p-5 shadow-2xl">
+              <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-3">
                 <div className="flex items-center space-x-2">
-                  <Box className="w-4 h-4 text-blue-400" />
+                  <Box className="w-4 h-4 text-cyan-400" />
                   <h4 className="font-bold text-sm text-white">Emergency Logistics</h4>
                 </div>
                 <button
                   onClick={() => setShowResourceModal(true)}
-                  className="text-xs text-blue-400 hover:text-blue-300 font-medium"
+                  className="text-xs text-cyan-400 hover:text-cyan-300 font-medium"
                 >
                   + Add Stock
                 </button>
@@ -507,21 +522,21 @@ export default function Dashboard() {
 
               <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
                 {resources.map(res => (
-                  <div key={res.id} className="p-2.5 bg-slate-950/60 rounded-xl border border-slate-800/80">
+                  <div key={res.id} className="p-2.5 bg-[#030712]/80 rounded-xl border border-white/[0.08]">
                     <div className="flex items-start justify-between">
                       <div>
                         <p className="text-xs font-semibold text-white">{res.name}</p>
-                        <p className="text-[11px] text-slate-400">{res.location_name}</p>
+                        <p className="text-[11px] text-zinc-400">{res.location_name}</p>
                       </div>
                       <span className={`text-[10px] font-mono px-2 py-0.5 rounded uppercase font-semibold ${
-                        res.status === 'deployed' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
+                        res.status === 'deployed' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30' :
                         res.status === 'in-transit' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
                         'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                       }`}>
                         {res.status}
                       </span>
                     </div>
-                    <div className="mt-2 flex items-center justify-between text-[11px] text-slate-300 font-mono">
+                    <div className="mt-2 flex items-center justify-between text-[11px] text-zinc-300 font-mono">
                       <span>Reserve Count:</span>
                       <strong className="text-white">{res.quantity} {res.unit}</strong>
                     </div>
@@ -531,8 +546,8 @@ export default function Dashboard() {
             </div>
 
             {/* Live Warning Sirens Feed */}
-            <div className="bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-3xl p-5 shadow-2xl">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+            <div className="glass-panel rounded-3xl p-5 shadow-2xl">
+              <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-3">
                 <div className="flex items-center space-x-2">
                   <Radio className="w-4 h-4 text-amber-400 animate-pulse" />
                   <h4 className="font-bold text-sm text-white">Broadcast Sirens</h4>

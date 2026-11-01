@@ -144,7 +144,7 @@ export default function AlertModal({ onClose, disasterId }: AlertModalProps) {
                         ? 'bg-red-600 text-white shadow-md shadow-red-600/30 font-semibold' 
                         : t === 'warning'
                         ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30 font-semibold'
-                        : 'bg-blue-600 text-white shadow-md shadow-blue-600/30 font-semibold'
+                        : 'bg-cyan-500 text-black shadow-md shadow-cyan-500/30 font-semibold'
                       : 'text-slate-400 hover:text-white hover:bg-slate-800'
                   }`}
                 >

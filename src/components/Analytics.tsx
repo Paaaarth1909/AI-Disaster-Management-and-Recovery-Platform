@@ -139,12 +139,12 @@ export default function Analytics() {
           </span>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+        <div className="glass-panel rounded-2xl p-4 shadow-xl">
+          <div className="flex items-center justify-between text-xs text-zinc-400 mb-1">
             <span>Logistics Depots</span>
-            <Box className="w-4 h-4 text-blue-400" />
+            <Box className="w-4 h-4 text-cyan-400" />
           </div>
-          <span className="text-2xl font-bold font-mono text-blue-400">{resources.length}</span>
+          <span className="text-2xl font-bold font-mono text-cyan-400">{resources.length}</span>
         </div>
 
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
@@ -196,7 +196,7 @@ export default function Analytics() {
         <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col justify-between">
           <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
             <div className="flex items-center space-x-2">
-              <BarChart3 className="w-4 h-4 text-blue-400" />
+              <BarChart3 className="w-4 h-4 text-cyan-400" />
               <h3 className="text-sm font-bold text-white tracking-wide">Resource Allocation by Category</h3>
             </div>
             <span className="text-[10px] font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">

@@ -425,13 +425,13 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
               placeholder="Search sector, zone, or incident..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-slate-900/90 backdrop-blur-md text-xs text-white placeholder-slate-400 pl-8 pr-4 py-2 rounded-xl border border-slate-700/60 focus:outline-none focus:ring-1 focus:ring-blue-500/80 shadow-lg"
+              className="w-full bg-[#030712]/90 backdrop-blur-md text-xs text-white placeholder-zinc-400 pl-8 pr-4 py-2 rounded-xl border border-white/[0.12] focus:outline-none focus:ring-1 focus:ring-emerald-500 shadow-lg"
             />
-            <Crosshair className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+            <Crosshair className="w-3.5 h-3.5 text-zinc-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             {searchTerm && (
               <button 
                 onClick={() => setSearchTerm('')} 
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white text-xs"
               >
                 ×
               </button>
@@ -445,9 +445,9 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
           <button
             onClick={fitAllMarkers}
             title="Auto-fit all active emergency zones"
-            className="flex items-center space-x-1.5 bg-slate-900/90 hover:bg-slate-800 backdrop-blur-md text-slate-200 hover:text-white px-3 py-2 rounded-xl border border-slate-700/60 transition-all text-xs shadow-lg active:scale-95"
+            className="flex items-center space-x-1.5 bg-[#030712]/90 hover:bg-zinc-800 backdrop-blur-md text-zinc-200 hover:text-white px-3 py-2 rounded-xl border border-white/[0.12] transition-all text-xs shadow-lg active:scale-95"
           >
-            <Maximize2 className="w-3.5 h-3.5 text-blue-400" />
+            <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />
             <span className="hidden md:inline font-medium">Reset View</span>
           </button>
 
@@ -456,11 +456,11 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
             onClick={() => setShowLayerDrawer(!showLayerDrawer)}
             className={`flex items-center space-x-1.5 px-3 py-2 rounded-xl border transition-all text-xs shadow-lg active:scale-95 backdrop-blur-md ${
               showLayerDrawer 
-                ? 'bg-blue-600 border-blue-400 text-white shadow-blue-500/20' 
-                : 'bg-slate-900/90 hover:bg-slate-800 border-slate-700/60 text-slate-200'
+                ? 'bg-emerald-500 text-[#030712] font-bold shadow-lg shadow-emerald-500/30 border-emerald-400' 
+                : 'bg-[#030712]/90 hover:bg-zinc-800 border-white/[0.12] text-zinc-200'
             }`}
           >
-            <Layers className="w-3.5 h-3.5 text-blue-400" />
+            <Layers className="w-3.5 h-3.5 text-emerald-400" />
             <span className="font-medium">Layers & Style</span>
           </button>
         </div>
@@ -468,15 +468,15 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
 
       {/* Layer Control Panel (Floating Drawer) */}
       {showLayerDrawer && (
-        <div className="absolute top-16 right-4 z-30 w-72 bg-slate-900/95 backdrop-blur-xl border border-slate-700/80 rounded-2xl p-4 shadow-2xl text-xs space-y-4 animate-in fade-in slide-in-from-top-2 duration-150">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div className="absolute top-16 right-4 z-30 w-72 glass-panel border border-white/[0.15] rounded-2xl p-4 shadow-2xl text-xs space-y-4 animate-in fade-in slide-in-from-top-2 duration-150">
+          <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
             <h4 className="font-semibold text-white tracking-wide flex items-center space-x-1.5">
-              <Layers className="w-4 h-4 text-blue-400" />
+              <Layers className="w-4 h-4 text-emerald-400" />
               <span>Map Layer Controls</span>
             </h4>
             <button 
               onClick={() => setShowLayerDrawer(false)}
-              className="text-slate-400 hover:text-white text-base leading-none p-1"
+              className="text-zinc-400 hover:text-white text-base leading-none p-1"
             >
               ×
             </button>
@@ -484,10 +484,10 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
 
           {/* Basemap Switcher */}
           <div>
-            <label className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+            <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-2">
               Tactical Basemap
             </label>
-            <div className="grid grid-cols-2 gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+            <div className="grid grid-cols-2 gap-1.5 bg-[#030712] p-1.5 rounded-xl border border-white/[0.08]">
               {Object.values(BASEMAP_METADATA).map(bm => {
                 const Icon = bm.icon;
                 const active = activeBasemap === bm.id;
@@ -497,8 +497,8 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                     onClick={() => setActiveBasemap(bm.id as any)}
                     className={`flex items-center space-x-2 p-2 rounded-lg text-left transition-all ${
                       active
-                        ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30 font-semibold'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                        ? 'bg-emerald-500 text-[#030712] font-bold shadow-md shadow-emerald-500/30'
+                        : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
                     }`}
                   >
                     <Icon className="w-3.5 h-3.5 flex-shrink-0" />
@@ -510,17 +510,17 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
           </div>
 
           {/* Mapbox Token Status & Dynamic Config */}
-          <div className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+          <div className="p-2.5 rounded-xl bg-[#030712]/90 border border-white/[0.08] space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-1.5">
                 <span className={`w-2 h-2 rounded-full ${hasToken ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`}></span>
-                <span className="text-[10px] font-mono font-medium text-slate-300">
+                <span className="text-[10px] font-mono font-medium text-zinc-300">
                   {hasToken ? 'Mapbox Live Vector' : 'Raster Tile Fallback'}
                 </span>
               </div>
               <button
                 onClick={() => setShowTokenSettings(!showTokenSettings)}
-                className="text-[10px] text-blue-400 hover:text-blue-300 font-mono flex items-center space-x-0.5"
+                className="text-[10px] text-cyan-400 hover:text-cyan-300 font-mono flex items-center space-x-0.5"
               >
                 <Key className="w-2.5 h-2.5 mr-0.5" />
                 <span>{showTokenSettings ? 'Close' : 'Token'}</span>
@@ -528,19 +528,19 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
             </div>
 
             {hasToken && (
-              <p className="text-[9px] font-mono text-slate-500 truncate">
+              <p className="text-[9px] font-mono text-zinc-500 truncate">
                 Active: {activeToken.slice(0, 16)}...
               </p>
             )}
 
             {showTokenSettings && (
-              <div className="pt-1.5 space-y-1.5 border-t border-slate-800/80">
+              <div className="pt-1.5 space-y-1.5 border-t border-white/[0.08]">
                 <input
                   type="text"
                   placeholder="Paste Mapbox pk.eyJ1... key"
                   value={tokenInput}
                   onChange={(e) => setTokenInput(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-[10px] text-white font-mono placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-[#030712] border border-white/[0.12] rounded-lg px-2 py-1 text-[10px] text-white font-mono placeholder-zinc-500 focus:outline-none focus:border-cyan-500"
                 />
                 <button
                   onClick={() => {
@@ -551,7 +551,7 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                       setShowTokenSettings(false);
                     }
                   }}
-                  className="w-full py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors"
+                  className="w-full py-1 glass-btn-primary text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors"
                 >
                   Save & Reload Basemap
                 </button>
@@ -561,34 +561,34 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
 
           {/* Overlays Toggle */}
           <div>
-            <label className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+            <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-2">
               Hazards & Infrastructure
             </label>
             <div className="space-y-1.5">
               {[
                 { label: 'Incident Markers', state: showDisasters, set: setShowDisasters, color: 'text-red-400' },
                 { label: 'Response Units', state: showTeams, set: setShowTeams, color: 'text-emerald-400' },
-                { label: 'Supply Depots', state: showResources, set: setShowResources, color: 'text-blue-400' },
+                { label: 'Supply Depots', state: showResources, set: setShowResources, color: 'text-cyan-400' },
                 { label: 'Evacuation Zones', state: showEvacZones, set: setShowEvacZones, color: 'text-amber-400' },
                 { label: 'Flood Hazard Layer', state: showFloodHazard, set: setShowFloodHazard, color: 'text-cyan-400' },
-                { label: 'Emergency Rescue Lines', state: showRescueRoutes, set: setShowRescueRoutes, color: 'text-green-400' }
+                { label: 'Emergency Rescue Lines', state: showRescueRoutes, set: setShowRescueRoutes, color: 'text-emerald-400' }
               ].map((item, idx) => (
                 <button
                   key={idx}
                   onClick={() => item.set(!item.state)}
                   className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg border text-left transition-all ${
                     item.state 
-                      ? 'bg-slate-800/80 border-slate-700 text-slate-100' 
-                      : 'bg-slate-950/40 border-slate-800/60 text-slate-500'
+                      ? 'bg-zinc-800/80 border-white/[0.1] text-zinc-100' 
+                      : 'bg-[#030712]/50 border-white/[0.05] text-zinc-500'
                   }`}
                 >
-                  <span className={`font-medium ${item.state ? item.color : 'text-slate-500'}`}>
+                  <span className={`font-medium ${item.state ? item.color : 'text-zinc-500'}`}>
                     {item.label}
                   </span>
                   {item.state ? (
-                    <Eye className="w-3.5 h-3.5 text-blue-400" />
+                    <Eye className="w-3.5 h-3.5 text-emerald-400" />
                   ) : (
-                    <EyeOff className="w-3.5 h-3.5 text-slate-600" />
+                    <EyeOff className="w-3.5 h-3.5 text-zinc-600" />
                   )}
                 </button>
               ))}
@@ -715,7 +715,7 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
             disaster.severity >= 5 ? 'bg-red-600 shadow-red-500/50' :
             disaster.severity >= 4 ? 'bg-orange-600 shadow-orange-500/50' :
             disaster.severity >= 3 ? 'bg-amber-500 shadow-amber-500/50' :
-            'bg-blue-600 shadow-blue-500/50';
+            'bg-cyan-500 shadow-cyan-500/50';
 
           return (
             <Marker
@@ -773,9 +773,9 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                 setSelectedTeam(null);
               }}
             >
-              <div className="cursor-pointer transform hover:scale-125 transition-transform bg-slate-900/90 hover:bg-slate-800 p-1.5 rounded-lg border border-blue-500 shadow-md">
+              <div className="cursor-pointer transform hover:scale-125 transition-transform bg-[#030712]/90 hover:bg-zinc-800 p-1.5 rounded-lg border border-cyan-500 shadow-md">
                 <Icon className={`w-3.5 h-3.5 ${
-                  resource.status === 'deployed' ? 'text-blue-400' :
+                  resource.status === 'deployed' ? 'text-cyan-400' :
                   resource.status === 'in-transit' ? 'text-amber-400' :
                   'text-emerald-400'
                 }`} />
@@ -802,10 +802,10 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                 setSelectedResource(null);
               }}
             >
-              <div className="cursor-pointer transform hover:scale-125 transition-transform bg-slate-900/90 hover:bg-slate-800 p-1.5 rounded-full border border-emerald-500 shadow-md">
+              <div className="cursor-pointer transform hover:scale-125 transition-transform bg-[#030712]/90 hover:bg-zinc-800 p-1.5 rounded-full border border-emerald-500 shadow-md">
                 <Users className={`w-3.5 h-3.5 ${
                   team.status === 'responding' ? 'text-amber-400 animate-pulse' :
-                  team.status === 'on-site' ? 'text-blue-400' :
+                  team.status === 'on-site' ? 'text-cyan-400' :
                   'text-emerald-400'
                 }`} />
               </div>
@@ -825,13 +825,13 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
             className="emergency-popup z-30"
             offset={20}
           >
-            <div className="bg-slate-900 text-white p-4 rounded-xl shadow-2xl border border-slate-700 max-w-sm">
+            <div className="bg-[#030712] text-white p-4 rounded-2xl shadow-2xl border border-white/[0.12] max-w-sm">
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div>
                   <span className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded font-bold tracking-wider inline-block mb-1 ${
                     popupInfo.severity >= 4 ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
                     popupInfo.severity >= 3 ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
-                    'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                    'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
                   }`}>
                     LEVEL {popupInfo.severity} &bull; {popupInfo.type}
                   </span>
@@ -839,25 +839,25 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                 </div>
               </div>
 
-              <p className="text-xs text-slate-300 mb-3 leading-relaxed">
+              <p className="text-xs text-zinc-300 mb-3 leading-relaxed">
                 {popupInfo.description || 'Active emergency scenario monitoring.'}
               </p>
 
-              <div className="grid grid-cols-2 gap-2 text-xs bg-slate-950/70 p-2.5 rounded-lg border border-slate-800 mb-3">
+              <div className="grid grid-cols-2 gap-2 text-xs bg-[#030712]/90 p-2.5 rounded-xl border border-white/[0.08] mb-3">
                 <div>
-                  <span className="text-[10px] text-slate-400 font-mono uppercase block">Sector</span>
-                  <span className="font-medium text-slate-200">{popupInfo.location_name}</span>
+                  <span className="text-[10px] text-zinc-400 font-mono uppercase block">Sector</span>
+                  <span className="font-medium text-zinc-200">{popupInfo.location_name}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 font-mono uppercase block">Radius</span>
-                  <span className="font-medium text-slate-200">{popupInfo.affected_radius_km} km</span>
+                  <span className="text-[10px] text-zinc-400 font-mono uppercase block">Radius</span>
+                  <span className="font-medium text-zinc-200">{popupInfo.affected_radius_km} km</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 font-mono uppercase block">Estimated Affected</span>
-                  <span className="font-medium text-slate-200">{popupInfo.affected_population?.toLocaleString() || 'Calculating'}</span>
+                  <span className="text-[10px] text-zinc-400 font-mono uppercase block">Estimated Affected</span>
+                  <span className="font-medium text-zinc-200">{popupInfo.affected_population?.toLocaleString() || 'Calculating'}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 font-mono uppercase block">Status</span>
+                  <span className="text-[10px] text-zinc-400 font-mono uppercase block">Status</span>
                   <span className="font-medium text-emerald-400 capitalize">{popupInfo.status}</span>
                 </div>
               </div>
@@ -867,7 +867,7 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                   onClick={() => {
                     onDisasterSelect?.(popupInfo.id);
                   }}
-                  className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-1.5 px-3 rounded-lg text-xs transition-colors flex items-center justify-center space-x-1"
+                  className="flex-1 glass-btn-primary text-white font-medium py-1.5 px-3 rounded-xl text-xs transition-colors flex items-center justify-center space-x-1"
                 >
                   <span>Select Sector</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -888,9 +888,9 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
             closeOnClick={false}
             offset={15}
           >
-            <div className="bg-slate-900 text-white p-3.5 rounded-xl shadow-2xl border border-slate-700 max-w-xs">
+            <div className="bg-[#030712] text-white p-3.5 rounded-2xl shadow-2xl border border-white/[0.12] max-w-xs">
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] font-mono uppercase bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-bold">
+                <span className="text-[10px] font-mono uppercase bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded font-bold">
                   {selectedResource.type}
                 </span>
                 <span className="text-[10px] text-emerald-400 font-medium capitalize">
@@ -898,15 +898,15 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                 </span>
               </div>
               <h4 className="font-bold text-sm text-white mb-1">{selectedResource.name}</h4>
-              <p className="text-xs text-slate-300 mb-2">{selectedResource.description}</p>
-              <div className="text-xs bg-slate-950 p-2 rounded border border-slate-800 space-y-1">
+              <p className="text-xs text-zinc-300 mb-2">{selectedResource.description}</p>
+              <div className="text-xs bg-[#030712]/90 p-2 rounded-xl border border-white/[0.08] space-y-1">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Stock Available:</span>
+                  <span className="text-zinc-400">Stock Available:</span>
                   <span className="font-semibold text-white">{selectedResource.quantity} {selectedResource.unit}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Hub:</span>
-                  <span className="text-slate-200">{selectedResource.location_name}</span>
+                  <span className="text-zinc-400">Hub:</span>
+                  <span className="text-zinc-200">{selectedResource.location_name}</span>
                 </div>
               </div>
             </div>
@@ -924,7 +924,7 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
             closeOnClick={false}
             offset={15}
           >
-            <div className="bg-slate-900 text-white p-3.5 rounded-xl shadow-2xl border border-slate-700 max-w-xs">
+            <div className="bg-[#030712] text-white p-3.5 rounded-2xl shadow-2xl border border-white/[0.12] max-w-xs">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-[10px] font-mono uppercase bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-bold">
                   {selectedTeam.type} UNIT
@@ -934,14 +934,14 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
                 </span>
               </div>
               <h4 className="font-bold text-sm text-white mb-1">{selectedTeam.name}</h4>
-              <div className="text-xs bg-slate-950 p-2 rounded border border-slate-800 space-y-1">
+              <div className="text-xs bg-[#030712]/90 p-2 rounded-xl border border-white/[0.08] space-y-1">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Personnel:</span>
+                  <span className="text-zinc-400">Personnel:</span>
                   <span className="font-semibold text-white">{selectedTeam.current_members} / {selectedTeam.capacity}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Deployment Base:</span>
-                  <span className="text-slate-200">{selectedTeam.location_name}</span>
+                  <span className="text-zinc-400">Deployment Base:</span>
+                  <span className="text-zinc-200">{selectedTeam.location_name}</span>
                 </div>
               </div>
             </div>
@@ -950,7 +950,7 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
       </Map>
 
       {/* Bottom Floating Legend Pill */}
-      <div className="absolute bottom-4 left-4 z-20 pointer-events-none hidden sm:flex items-center space-x-3 bg-slate-900/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-700/60 shadow-lg text-[11px] text-slate-300">
+      <div className="absolute bottom-4 left-4 z-20 pointer-events-none hidden sm:flex items-center space-x-3 glass-panel px-3.5 py-2 rounded-xl border border-white/[0.12] shadow-lg text-[11px] text-zinc-300">
         <div className="flex items-center space-x-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500"></span>
           <span>Catastrophe (Lv 4-5)</span>
@@ -960,7 +960,7 @@ export default function DisasterMap({ onDisasterSelect, selectedDisasterId }: Di
           <span>Moderate (Lv 3)</span>
         </div>
         <div className="flex items-center space-x-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
           <span>Supply Hub</span>
         </div>
         <div className="flex items-center space-x-1.5">

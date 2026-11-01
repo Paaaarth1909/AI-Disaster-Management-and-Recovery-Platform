@@ -140,23 +140,23 @@ export function Globe({
   }, [disasters]);
 
   return (
-    <div className={`relative w-full h-full flex items-center justify-center overflow-hidden bg-slate-950 font-sans ${className}`}>
+    <div className={`relative w-full h-full flex items-center justify-center overflow-hidden bg-[#030712] font-sans ${className}`}>
       {/* Top Telemetry Header */}
-      <div className="absolute top-4 left-4 z-20 flex items-center space-x-2 bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-300 shadow-xl">
-        <Globe2 className="w-4 h-4 text-blue-400 animate-spin" style={{ animationDuration: '12s' }} />
+      <div className="absolute top-4 left-4 z-20 flex items-center space-x-2 glass-panel px-3.5 py-1.5 rounded-xl border border-white/[0.12] text-xs text-zinc-300 shadow-xl">
+        <Globe2 className="w-4 h-4 text-emerald-400 animate-spin" style={{ animationDuration: '12s' }} />
         <span className="font-mono text-emerald-400 font-semibold tracking-wider">HOLO-GLOBE RECON</span>
-        <span className="text-slate-600">|</span>
-        <span className="text-slate-400">{markers.length} Active Targets Projected</span>
+        <span className="text-zinc-600">|</span>
+        <span className="text-zinc-400">{markers.length} Active Targets Projected</span>
       </div>
 
-      <div className="absolute top-4 right-4 z-20 hidden sm:flex items-center space-x-2 bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-400 shadow-xl">
-        <RotateCw className="w-3.5 h-3.5 text-blue-400" />
+      <div className="absolute top-4 right-4 z-20 hidden sm:flex items-center space-x-2 glass-panel px-3.5 py-1.5 rounded-xl border border-white/[0.12] text-xs text-zinc-400 shadow-xl">
+        <RotateCw className="w-3.5 h-3.5 text-emerald-400" />
         <span className="font-mono">Click & Drag to Rotate</span>
       </div>
 
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm z-30">
-          <div className="animate-spin rounded-full h-16 w-16 border-2 border-blue-500/20 border-t-blue-500"></div>
+        <div className="absolute inset-0 flex items-center justify-center bg-[#030712]/80 backdrop-blur-sm z-30">
+          <div className="animate-spin rounded-full h-16 w-16 border-2 border-emerald-500/20 border-t-emerald-500"></div>
         </div>
       )}
 
@@ -179,12 +179,12 @@ export function Globe({
       />
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-2xl p-3.5 shadow-xl text-xs text-white z-20">
-        <div className="flex items-center space-x-1.5 mb-2 font-semibold text-slate-300">
-          <Eye className="w-3.5 h-3.5 text-blue-400" />
+      <div className="absolute bottom-4 left-4 glass-panel border border-white/[0.12] rounded-2xl p-3.5 shadow-xl text-xs text-white z-20">
+        <div className="flex items-center space-x-1.5 mb-2 font-semibold text-zinc-300">
+          <Eye className="w-3.5 h-3.5 text-cyan-400" />
           <span>Global Hazard Key</span>
         </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px] text-slate-300">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px] text-zinc-300">
           {['earthquake', 'flood', 'hurricane', 'tornado', 'wildfire', 'tsunami'].map(type => (
             <div key={type} className="flex items-center space-x-2">
               <div 
@@ -200,9 +200,9 @@ export function Globe({
       </div>
 
       {/* Target Sector Jump Panel */}
-      <div className="absolute bottom-4 right-4 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-2xl p-3 shadow-xl text-xs text-white z-20 max-w-xs hidden sm:block">
-        <div className="flex items-center space-x-1.5 mb-2 font-semibold text-slate-300">
-          <Target className="w-3.5 h-3.5 text-blue-400" />
+      <div className="absolute bottom-4 right-4 glass-panel border border-white/[0.12] rounded-2xl p-3 shadow-xl text-xs text-white z-20 max-w-xs hidden sm:block">
+        <div className="flex items-center space-x-1.5 mb-2 font-semibold text-zinc-300">
+          <Target className="w-3.5 h-3.5 text-emerald-400" />
           <span>Orbital Jump To Sector</span>
         </div>
         <div className="space-y-1.5">
@@ -212,8 +212,8 @@ export function Globe({
               onClick={() => focusSector(d)}
               className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl border text-left transition-all ${
                 selectedDisasterId === d.id
-                  ? 'bg-blue-600 border-blue-400 text-white shadow'
-                  : 'bg-slate-950/60 border-slate-800/80 hover:bg-slate-800 text-slate-300'
+                  ? 'bg-emerald-500 border-emerald-400 text-[#030712] font-bold shadow-lg shadow-emerald-500/30'
+                  : 'bg-[#030712]/60 border-white/[0.08] hover:bg-zinc-800 text-zinc-300'
               }`}
             >
               <div className="truncate pr-2">

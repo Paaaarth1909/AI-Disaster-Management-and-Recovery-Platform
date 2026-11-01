@@ -203,7 +203,7 @@ export default function ReportIncident({ onClose }: ReportIncidentProps) {
                 type="button"
                 onClick={handleDetectLocation}
                 disabled={locating}
-                className="text-[11px] text-blue-400 hover:text-blue-300 flex items-center space-x-1"
+                className="text-[11px] text-cyan-400 hover:text-cyan-300 flex items-center space-x-1"
               >
                 <Locate className={`w-3 h-3 ${locating ? 'animate-spin' : ''}`} />
                 <span>{locating ? 'Acquiring GPS...' : 'Use My GPS'}</span>
@@ -212,7 +212,7 @@ export default function ReportIncident({ onClose }: ReportIncidentProps) {
             <input
               type="text"
               required
-              className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50"
+              className="w-full bg-[#030712] border border-white/[0.12] rounded-xl px-3.5 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50"
               value={formData.location_name}
               onChange={(e) => setFormData({ ...formData, location_name: e.target.value })}
               placeholder="e.g. Aluva Bridge Sector, Kochi"
@@ -220,7 +220,7 @@ export default function ReportIncident({ onClose }: ReportIncidentProps) {
 
             {/* Quick Sector Presets */}
             <div className="flex flex-wrap gap-1.5 mt-2">
-              <span className="text-[10px] text-slate-400 font-mono py-0.5">Presets:</span>
+              <span className="text-[10px] text-zinc-400 font-mono py-0.5">Presets:</span>
               {PRESET_LOCATIONS.map((loc, i) => (
                 <button
                   type="button"
@@ -232,9 +232,9 @@ export default function ReportIncident({ onClose }: ReportIncidentProps) {
                       location: { type: 'Point', coordinates: [loc.lng, loc.lat] }
                     }));
                   }}
-                  className="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700 flex items-center space-x-1 transition-all"
+                  className="text-[10px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded-md border border-white/[0.08] flex items-center space-x-1 transition-all"
                 >
-                  <MapPin className="w-2.5 h-2.5 text-blue-400" />
+                  <MapPin className="w-2.5 h-2.5 text-cyan-400" />
                   <span>{loc.name}</span>
                 </button>
               ))}
@@ -244,28 +244,28 @@ export default function ReportIncident({ onClose }: ReportIncidentProps) {
           {/* Coordinates */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[11px] font-mono uppercase text-slate-400 mb-1">
+              <label className="block text-[11px] font-mono uppercase text-zinc-400 mb-1">
                 Longitude (&deg;E)
               </label>
               <input
                 type="number"
                 step="any"
                 required
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full bg-[#030712] border border-white/[0.12] rounded-xl px-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-500"
                 value={formData.location?.coordinates[0] ?? ''}
                 onChange={(e) => handleCoordinateChange('longitude', e.target.value)}
                 placeholder="76.2711"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-mono uppercase text-slate-400 mb-1">
+              <label className="block text-[11px] font-mono uppercase text-zinc-400 mb-1">
                 Latitude (&deg;N)
               </label>
               <input
                 type="number"
                 step="any"
                 required
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full bg-[#030712] border border-white/[0.12] rounded-xl px-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-500"
                 value={formData.location?.coordinates[1] ?? ''}
                 onChange={(e) => handleCoordinateChange('latitude', e.target.value)}
                 placeholder="10.8505"
@@ -274,15 +274,15 @@ export default function ReportIncident({ onClose }: ReportIncidentProps) {
           </div>
 
           {/* Severity Slider */}
-          <div className="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+          <div className="bg-[#030712]/90 p-3 rounded-xl border border-white/[0.08]">
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-mono uppercase tracking-wider text-slate-300">
+              <label className="text-xs font-mono uppercase tracking-wider text-zinc-300">
                 Threat Severity Level
               </label>
               <span className={`px-2 py-0.5 rounded text-xs font-bold font-mono ${
                 (formData.severity ?? 3) >= 4 ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
                 (formData.severity ?? 3) >= 3 ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
-                'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
               }`}>
                 LEVEL {formData.severity ?? 3} / 5
               </span>

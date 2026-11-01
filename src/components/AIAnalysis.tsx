@@ -120,17 +120,17 @@ export default function AIAnalysis() {
     <div className="space-y-6 max-w-6xl mx-auto text-white font-sans">
       
       {/* Top Banner & Incident Selector */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-wrap items-center justify-between gap-4">
+      <div className="glass-panel border border-white/[0.12] rounded-3xl p-5 shadow-2xl flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center space-x-3">
-          <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/20">
+          <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-500 text-black shadow-lg shadow-emerald-500/20">
             <Brain className="w-6 h-6 animate-pulse" />
           </div>
           <div>
             <h2 className="text-lg font-bold tracking-tight text-white flex items-center space-x-2">
               <span>Gemini AI Tactical Diagnostics</span>
-              <Sparkles className="w-4 h-4 text-purple-400" />
+              <Sparkles className="w-4 h-4 text-emerald-400" />
             </h2>
-            <p className="text-xs text-slate-400">Time-series forecasting, resource allocation & rumor intelligence</p>
+            <p className="text-xs text-zinc-400">Time-series forecasting, resource allocation & rumor intelligence</p>
           </div>
         </div>
 
@@ -139,7 +139,7 @@ export default function AIAnalysis() {
           <select
             value={selectedDisasterId}
             onChange={(e) => setSelectedDisasterId(e.target.value)}
-            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500 font-medium"
+            className="bg-[#030712] border border-white/[0.12] rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 font-medium"
           >
             {disasters.map(d => (
               <option key={d.id} value={d.id}>
@@ -151,7 +151,7 @@ export default function AIAnalysis() {
           <button
             onClick={handleAnalyzeDisaster}
             disabled={loading}
-            className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-semibold shadow-lg shadow-purple-600/30 flex items-center space-x-1.5 transition-all active:scale-95 disabled:opacity-50"
+            className="px-4 py-2 glass-btn-primary text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all active:scale-95 disabled:opacity-50"
           >
             {loading && analysisType === 'diagnostics' ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -167,25 +167,25 @@ export default function AIAnalysis() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         
         {/* Severity Diagnostics Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-col justify-between">
+        <div className="glass-panel rounded-3xl p-5 shadow-2xl flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-3">
               <div className="flex items-center space-x-2">
                 <AlertTriangle className="w-4 h-4 text-amber-400" />
                 <h3 className="font-bold text-sm text-white">Severity & Immediate Actions</h3>
               </div>
-              <span className="text-[10px] font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+              <span className="text-[10px] font-mono text-zinc-400 bg-zinc-950 px-2 py-0.5 rounded border border-white/[0.08]">
                 PRO 1.5 DEEP REASONING
               </span>
             </div>
             
             {loading && analysisType === 'diagnostics' ? (
-              <div className="flex flex-col items-center justify-center py-12 text-slate-400 text-xs space-y-2">
-                <Loader2 className="w-6 h-6 animate-spin text-purple-400" />
+              <div className="flex flex-col items-center justify-center py-12 text-zinc-400 text-xs space-y-2">
+                <Loader2 className="w-6 h-6 animate-spin text-emerald-400" />
                 <span>Synthesizing threat vector matrix...</span>
               </div>
             ) : (
-              <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800/80 text-xs text-slate-200 leading-relaxed whitespace-pre-line font-mono">
+              <div className="bg-[#030712]/80 p-4 rounded-2xl border border-white/[0.08] text-xs text-zinc-200 leading-relaxed whitespace-pre-line font-mono">
                 {analysis.severity || 'Select a disaster above and click "Analyze Incident" to generate deep diagnostics.'}
               </div>
             )}
@@ -198,33 +198,33 @@ export default function AIAnalysis() {
         </div>
 
         {/* Resource Demand Forecasting Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-col justify-between">
+        <div className="glass-panel rounded-3xl p-5 shadow-2xl flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-3">
               <div className="flex items-center space-x-2">
-                <Shield className="w-4 h-4 text-blue-400" />
+                <Shield className="w-4 h-4 text-cyan-400" />
                 <h3 className="font-bold text-sm text-white">Projected Logistics & Triage Needs</h3>
               </div>
-              <span className="text-[10px] font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+              <span className="text-[10px] font-mono text-zinc-400 bg-zinc-950 px-2 py-0.5 rounded border border-white/[0.08]">
                 LOGISTICS AI
               </span>
             </div>
 
             {loading && analysisType === 'diagnostics' ? (
-              <div className="flex flex-col items-center justify-center py-12 text-slate-400 text-xs space-y-2">
-                <Loader2 className="w-6 h-6 animate-spin text-blue-400" />
+              <div className="flex flex-col items-center justify-center py-12 text-zinc-400 text-xs space-y-2">
+                <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
                 <span>Forecasting population triage requirements...</span>
               </div>
             ) : (
-              <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800/80 text-xs text-slate-200 leading-relaxed whitespace-pre-line font-mono">
+              <div className="bg-[#030712]/80 p-4 rounded-2xl border border-white/[0.08] text-xs text-zinc-200 leading-relaxed whitespace-pre-line font-mono">
                 {analysis.resources || 'Select a disaster and click "Analyze Incident" to predict required relief aid.'}
               </div>
             )}
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400">
+          <div className="mt-4 pt-3 border-t border-white/[0.08] flex items-center justify-between text-[11px] text-zinc-400">
             <span>Affected Pop: {activeDisaster?.affected_population?.toLocaleString() || 'Unknown'}</span>
-            <span className="text-blue-400">Supply Pipeline: Linked</span>
+            <span className="text-cyan-400">Supply Pipeline: Linked</span>
           </div>
         </div>
 
@@ -295,15 +295,15 @@ export default function AIAnalysis() {
 
       {/* Comprehensive Situation Report (SitRep) */}
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-2xl space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
           <div className="flex items-center space-x-2">
-            <FileText className="w-4 h-4 text-blue-400" />
+            <FileText className="w-4 h-4 text-emerald-400" />
             <h3 className="font-bold text-sm text-white">Full EOC Executive Situation Report (SitRep)</h3>
           </div>
           <button
             onClick={handleGenerateSituationReport}
             disabled={loading}
-            className="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-blue-600/30 flex items-center space-x-1.5 transition-all active:scale-95 disabled:opacity-50"
+            className="px-4 py-1.5 glass-btn-primary text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all active:scale-95 disabled:opacity-50"
           >
             {loading && analysisType === 'sitrep' ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />

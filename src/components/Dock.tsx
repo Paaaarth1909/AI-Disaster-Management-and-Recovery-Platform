@@ -124,7 +124,7 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
                     <span className={`px-2 py-0.5 rounded text-xs font-mono uppercase font-semibold block mb-1 ${
                       team.status === 'available' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
                       team.status === 'responding' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
-                      'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                      'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
                     }`}>
                       {team.status}
                     </span>
@@ -143,10 +143,10 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-800">
               <div className="flex items-center space-x-2">
-                <Box className="w-5 h-5 text-blue-400" />
+                <Box className="w-5 h-5 text-cyan-400" />
                 <h3 className="font-bold text-base text-white">Stockpiles & Relief Supplies</h3>
               </div>
-              <span className="text-xs font-mono text-blue-400 font-semibold bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-500/20">
+              <span className="text-xs font-mono text-cyan-400 font-semibold bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">
                 {resources.length} Warehouses Tracked
               </span>
             </div>
@@ -158,7 +158,7 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
                       {res.type === 'medical' ? <Shield className="w-4 h-4 text-rose-400" /> :
                        res.type === 'water' ? <Wind className="w-4 h-4 text-cyan-400" /> :
                        res.type === 'transport' ? <Truck className="w-4 h-4 text-emerald-400" /> :
-                       <Box className="w-4 h-4 text-blue-400" />}
+                       <Box className="w-4 h-4 text-cyan-400" />}
                     </div>
                     <div>
                       <h4 className="font-semibold text-white text-sm">{res.name}</h4>
@@ -170,7 +170,7 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
                       {res.quantity.toLocaleString()} {res.unit}
                     </span>
                     <span className={`text-[10px] uppercase font-mono font-semibold ${
-                      res.status === 'deployed' ? 'text-blue-400' :
+                      res.status === 'deployed' ? 'text-cyan-400' :
                       res.status === 'in-transit' ? 'text-amber-400' :
                       'text-emerald-400'
                     }`}>
@@ -214,7 +214,7 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
                       onViewChange('map');
                       setShowPanel(false);
                     }}
-                    className="px-2.5 py-1 bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs rounded-lg transition-colors font-medium"
+                    className="px-2.5 py-1 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/20 text-xs rounded-lg transition-colors font-medium"
                   >
                     Locate
                   </button>
@@ -242,11 +242,11 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
                 placeholder="Broadcast operational field dispatch message..."
                 value={newMsg}
                 onChange={(e) => setNewMsg(e.target.value)}
-                className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                className="flex-1 bg-[#030712] border border-white/[0.08] rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl flex items-center space-x-1.5 transition-colors"
+                className="px-4 py-2 glass-btn-primary text-white text-xs font-semibold rounded-xl flex items-center space-x-1.5 transition-colors"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>Send</span>
@@ -255,14 +255,14 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
 
             <div className="space-y-2.5 max-h-[42vh] overflow-y-auto pr-1">
               {comms.map(c => (
-                <div key={c.id} className="p-3 bg-slate-950/70 rounded-xl border border-slate-800 space-y-1">
+                <div key={c.id} className="p-3 bg-[#030712]/70 rounded-xl border border-white/[0.08] space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-blue-400">{c.sender}</span>
-                    <span className="text-[10px] font-mono text-slate-500">
+                    <span className="font-semibold text-emerald-400">{c.sender}</span>
+                    <span className="text-[10px] font-mono text-zinc-500">
                       {new Date(c.timestamp).toLocaleTimeString()}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-200 leading-relaxed">{c.content}</p>
+                  <p className="text-xs text-zinc-200 leading-relaxed">{c.content}</p>
                 </div>
               ))}
             </div>
@@ -278,7 +278,7 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
     <>
       {/* Floating Center Dock Bar */}
       <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 max-w-[calc(100vw-1.5rem)]">
-        <div className="flex items-center space-x-1 sm:space-x-1.5 bg-slate-900/90 backdrop-blur-2xl rounded-2xl p-1.5 sm:p-2 border border-slate-700/80 shadow-2xl shadow-black/80">
+        <div className="flex items-center space-x-1 sm:space-x-1.5 glass-panel rounded-2xl p-1.5 sm:p-2 border border-white/[0.12] shadow-2xl shadow-black/90">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = item.id === 'chat' 
@@ -293,8 +293,8 @@ export default function Dock({ activeView, onViewChange }: DockProps) {
                 onClick={() => handleViewChange(item.id)}
                 className={`relative group p-2.5 sm:p-3 rounded-xl transition-all duration-200 ${
                   isActive
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                    ? 'bg-emerald-500 text-[#030712] font-bold shadow-lg shadow-emerald-500/40 scale-105'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
                 }`}
               >
                 <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
